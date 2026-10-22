@@ -2,13 +2,13 @@
 
 > This is a working scratchpad for the paper-analysis phase. The output of this file feeds the Quote / AIDA / Claim drafts. It is not itself a nanopub.
 
-**Reference paper:** {{PAPER_TITLE}}
+**Reference paper:** Towards Global-Scale Seagrass Mapping and Monitoring Using Sentinel-2 on Google Earth Engine: The Case Study of the Aegean and Ionian Seas
 
-**DOI:** {{PAPER_DOI}}
+**DOI:** 10.3390/rs10081227
 
 **Authors:** _add._
 
-**Year:** {{PAPER_YEAR}}
+**Year:** 2018
 
 ## Headline claim
 

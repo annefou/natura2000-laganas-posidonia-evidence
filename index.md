@@ -1,8 +1,8 @@
-# {{REPO_NAME}}
+# natura2000-laganas-posidonia-evidence
 
-> **{{PAPER_TITLE}}** — replication study.
+> **Towards Global-Scale Seagrass Mapping and Monitoring Using Sentinel-2 on Google Earth Engine: The Case Study of the Aegean and Ionian Seas** — replication study.
 >
-> Reference paper: [{{PAPER_DOI}}](https://doi.org/{{PAPER_DOI}})
+> Reference paper: [10.3390/rs10081227](https://doi.org/10.3390/rs10081227)
 
 This repository is a self-contained replication of the headline claim from the reference paper above. It produces:
 
@@ -13,8 +13,8 @@ This repository is a self-contained replication of the headline claim from the r
 ## Quick start
 
 ```bash
-git clone https://github.com/{{REPO_ORG}}/{{REPO_NAME}}.git
-cd {{REPO_NAME}}
+git clone https://github.com/annefou/natura2000-laganas-posidonia-evidence.git
+cd natura2000-laganas-posidonia-evidence
 pixi install
 pixi run snakemake --cores 1
 ```
@@ -22,7 +22,7 @@ pixi run snakemake --cores 1
 Or with Docker:
 
 ```bash
-docker run --rm ghcr.io/{{REPO_ORG}}/{{REPO_NAME}}:latest
+docker run --rm ghcr.io/annefou/natura2000-laganas-posidonia-evidence:latest
 ```
 
 ## Structure
@@ -43,4 +43,4 @@ The published chain is listed in [`nanopubs/PUBLISHED.md`](nanopubs/PUBLISHED.md
 If you use this work, please cite both:
 
 - This software: [`CITATION.cff`](CITATION.cff) → DOI [{{ZENODO_DOI}}]({{ZENODO_DOI}}).
-- The original paper: [{{PAPER_DOI}}](https://doi.org/{{PAPER_DOI}}).
+- The original paper: [10.3390/rs10081227](https://doi.org/10.3390/rs10081227).
