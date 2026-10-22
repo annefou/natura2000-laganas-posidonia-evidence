@@ -2,6 +2,7 @@
 (2) confusion matrix (feature set A, out-of-fold); (3) accuracy by depth band.
 Usage: pixi run python pipeline/accuracy/04_figures.py <ROOT = work/accuracy>
 """
+import os
 import sys, json
 import numpy as np, matplotlib
 matplotlib.use("Agg")
@@ -10,6 +11,7 @@ from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch
 
 ROOT = sys.argv[1]
+os.makedirs(f"{ROOT}/figures", exist_ok=True)
 M = np.load(f"{ROOT}/data/maps.npz"); R = json.load(open(f"{ROOT}/results.json"))
 H, W, idx = int(M["H"]), int(M["W"]), M["idx"]
 TXT, TXT2, SURF = "#0b0b0b", "#52514e", "#fcfcfb"
