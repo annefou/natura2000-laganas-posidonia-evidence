@@ -98,6 +98,16 @@ accuracy = { cmd = """python pipeline/accuracy/01_composite.py work/accuracy \
   && python pipeline/accuracy/04_figures.py work/accuracy \
   && python pipeline/accuracy/05_healpix.py work/accuracy 15 \
   && python pipeline/accuracy/05_healpix.py work/accuracy 17""", depends-on = ["accuracy-inputs"] }
+# Same accuracy test with HEALPix (healpix-geo, WGS84, NESTED, depth 19) as the processing grid from the start:
+# each scene resampled conservatively onto cells. Work files in work/accuracy_healpix/. The last step compares
+# with the UTM-grid result and needs `accuracy` to have run.
+accuracy-healpix = { cmd = """python pipeline/accuracy_healpix/00_grid.py work/accuracy_healpix work/accuracy/data \
+  && python pipeline/accuracy_healpix/01_scenes.py work/accuracy_healpix 2025 \
+  && python pipeline/accuracy_healpix/01_scenes.py work/accuracy_healpix 2024 \
+  && python pipeline/accuracy_healpix/02_classify.py work/accuracy_healpix \
+  && python pipeline/accuracy_healpix/02_classify.py work/accuracy_healpix 12 \
+  && python pipeline/accuracy_healpix/03_stability.py work/accuracy_healpix \
+  && python pipeline/accuracy_healpix/04_compare.py work/accuracy_healpix work/accuracy""", depends-on = ["accuracy-inputs"] }
 # Marine heatwave exposure, observed (Copernicus Marine account in ~/.copernicusmarine). Needs `accuracy` first.
 climate-observed = """python pipeline/climate/01_download_cmems.py work/climate \
   && python pipeline/climate/02_cells.py work/climate \

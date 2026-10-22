@@ -1,0 +1,129 @@
+POSIDONIA ACCURACY TEST ON HEALPIX CELLS FROM THE START
+GR2210002, Laganas Bay. DRAFT, not reviewed.
+
+This is a re-run of pipeline/accuracy/. Here the HEALPix grid is the processing grid from the first step;
+in the existing run it is only the output grid.
+
+Run:          pixi run accuracy-healpix
+Numbers:      work/accuracy_healpix/results.json (HEALPix run)
+              work/accuracy/results*.json (UTM run)
+
+
+WHAT CHANGED, AND WHAT DID NOT
+
+Grid
+  healpix-geo, WGS84 ellipsoid, NESTED, depth 19.
+  Cell area is 154.634 m2: ellipsoid area / (12 * 4^19), authalic radius 6,371,007.18 m.
+  A geodesic polygon area check on 51 cells agrees to 1e-8.
+  Edge (sqrt of area) is 12.4 m.
+  There are 1,010,398 cells, all lying wholly inside the 01_composite window (snapped to 60 m).
+
+Scenes
+  The same 19 pinned Earth Search L2A scenes, bands, SCL classes {4,5,6} and DN -> reflectance as
+  01_composite.py. Each scene is read at native resolution and aggregated onto the cells with exact
+  cell x pixel area-overlap weights:
+    - Reflectance: conservative area-weighted mean of the valid native pixels.
+    - SCL: area-weighted majority, never averaged.
+    - No PSF or Gaussian kernel is used.
+  A native pixel is valid if DN > 0 and at least half its area has SCL in {4,5,6}.
+  A cell observation is valid if its SCL majority is in {4,5,6} and every band covers at least half
+  the cell.
+  The composite is the per-cell median of the valid observations.
+
+Conservation
+  The self-test on the real grid passes: the integral of a random field is preserved to 1e-15, and a
+  constant field is preserved exactly. See also tests/test_healpix_conservative.py (6 tests, passing).
+  healpix-resample is not in the environment, so the resampler is written out explicitly in common.py.
+
+Effective resolution
+  B2, B3, B4, B8 (10 m native):  about 12.4 m, the cell size.
+  B11 (20 m native):             20 m.
+  B1 (60 m native):              60 m. A cell is the area-weighted mean of the 1 to 4 coarse pixels
+                                 it overlaps (mean 1.6).
+                                 The UTM run also used nearest-neighbour 60 m B1.
+
+References
+  GR000019 and the 2015 survey:
+    - Candidate cells and the fully-covered flag come from healpix-geo polygon_coverage (WGS84).
+      On a sample, the flag agrees with the exact share in every case.
+    - Partially covered cells get the exact intersection share.
+    - Each cell takes the plurality class, with "unmapped" counted as a class.
+    - The shares are kept in data/cells.parquet.
+  Bathymetry: conservative area mean of the EMODnet DTM.
+  Site mask: site area share > 0.5. This gives 6,970.6 ha, against a planar UTM polygon area of
+  6,964.8 ha. The 0.08 % gap is the UTM scale factor.
+
+Unchanged from the UTM run
+  - Glint correction against NIR, regressed over deep water (> 60 m).
+  - Deep-water correction.
+  - Lyzenga depth-invariant indices (DII) and the B2/B3 ratio.
+  - Random Forest: 300 trees, minimum leaf 5, balanced classes, 30,000 training samples per fold.
+  - 5-fold GroupKFold, out-of-fold metrics.
+  - Random seeds.
+
+Blocks
+  HEALPix depth-13 parent cells: 0.63 km2 each, 120 blocks. The UTM run had 76 blocks of 1 km2.
+  Sensitivity check with depth-12 blocks (2.5 km2, 37 blocks): OA 74.5 %, kappa 0.485.
+
+
+COMPARISON (feature set A unless stated)
+
+Metric                                    UTM 10 m grid, then aggregated    HEALPix grid from the start
+----------------------------------------  --------------------------------  ---------------------------
+Domain                                    554,128 px / 5,541 ha             358,543 cells / 5,544 ha
+OA / kappa                                73.5 % / 0.469                    74.6 % / 0.488
+Posidonia PA / UA                         78.4 / 63.5 %                     77.9 / 65.1 %
+Other PA / UA                             70.3 / 83.2 %                     72.5 / 83.3 %
+Set B (+depth) OA / kappa                 77.8 % / 0.553                    78.7 % / 0.569
+Posidonia mapped vs reference             2,715 vs 2,199 ha (+23 %)         2,633 vs 2,202 ha (+20 %)
+OA by depth 0-5/5-10/10-20/20-30/30-40 m  77/82/77/62/53 %                  78/82/77/63/60 %
+2015 seagrass mapped as Posidonia         82.3 %                            81.9 %
+Depth-17 cells: majority agreement        76.7 %                            77.3 %
+Depth-17 cells: share MAE / bias          25.8 / +9.3 points                24.7 / +7.8 points
+2024 vs 2025 area, re-trained per year    2,525 vs 2,681 ha (-5.8 %)        2,551 vs 2,612 ha (-2.3 %)
+2024 vs 2025 unit disagreement            24.6 % of pixels                  25.8 % of cells
+~1 ha units with cover change > 25 points 18.1 % (1 ha squares)             22.3 % (depth 16, 0.99 ha)
+2025 model applied to 2024                1,644 ha                          1,520 ha
+
+
+WHY THE NUMBERS DIFFER
+
+1. All differences are small. The UTM pipeline reports set-A OA as 73.5 % in 02_classify.py. The same
+   design in 03_stability.py, with a different training subsample, reports 73.8 %. So a gap of about
+   0.3 points is subsample noise. The HEALPix gain (+1.1 points OA, +0.02 kappa) is somewhat larger
+   than that noise, but too small to count as a method improvement.
+
+2. The gain has a plausible cause:
+   - Conservative aggregation: a 154 m2 cell (1.55 pixel areas) is the area-weighted mean of the
+     ~6 native 10 m pixels it overlaps. This lowers pixel noise slightly and pools mixed pixels at
+     boundaries.
+   - The cell labels are cleaner. A cell takes the class covering the largest share of its area; a
+     pixel takes the class at its centre.
+   Both effects raise "Other" PA (+2.2 points) and slightly reduce over-mapping: +20 % vs +23 % in
+   area, and bias on depth-17 cells falls from +9.3 to +7.8 points. Neither changes what limits the
+   map: the 20-40 m depth band and a 1999-2002 reference.
+
+3. The domain and the reference areas agree to within 0.1 %:
+     domain:                5,541 ha (UTM) vs 5,544 ha (HEALPix)
+     reference Posidonia:   2,199 ha (UTM) vs 2,202 ha (HEALPix)
+     summed area share:     2,213 ha in the window, vs 2,211 ha in the site for the UTM run
+   So the inputs reach the cells without loss. Cell areas are computed on the ellipsoid. Hectares
+   counted from UTM pixels are about 0.08 % small because of the projection's scale factor.
+
+4. Year-to-year stability is no better:
+   - The re-trained area difference is smaller (-2.3 % vs -5.8 %).
+   - Disagreement at the level of single units is about the same (25.8 % vs 24.6 %).
+   - More ~1 ha units change by more than 25 points. Part of the reason is fewer units per parent:
+     64 cells per 0.99 ha, against 100 pixels per 1 ha square.
+   The smaller area difference is therefore within the classifier's noise and does not mean the map
+   is more stable. Neither grid can detect real change between consecutive years; about a quarter of
+   units disagree in both.
+
+
+VERDICT
+
+Running natively on HEALPix gives results equivalent to the UTM run:
+  OA 74.6 % vs 73.5 %, kappa 0.488 vs 0.469, area bias +20 % vs +23 %.
+Totals are preserved exactly, so HEALPix can serve as the processing grid with no loss of accuracy.
+The slightly better scores are within, or just above, run-to-run noise, so they should not be
+reported as an improvement.
