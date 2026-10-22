@@ -67,3 +67,4 @@ claude-resume.txt
 
 # Analysis work directories (downloads, intermediate rasters, Climate DT extracts) - never committed
 work/
+*.log
