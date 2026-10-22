@@ -8,7 +8,7 @@
 # this file; commit both files in the same commit.
 
 [workspace]
-name = "{{REPO_NAME}}"
+name = "natura2000-laganas-posidonia-evidence"
 # bioconda hosts snakemake (and downstream rule-engine ecosystem); conda-forge
 # is the priority channel for everything else.
 channels = ["conda-forge", "bioconda"]
@@ -49,11 +49,24 @@ snakemake = "*"
 # geopandas = "*"            # vector I/O
 # dask = "*"                 # out-of-core / parallel
 
+# --- this study ---
+scikit-learn = "*"           # Random Forest classifier, block cross-validation
+pyproj = "*"                 # UTM 34N <-> WGS84
+rasterio = "*"               # Sentinel-2 COGs, rasterising references, bathymetry
+geopandas = ">=1.0"          # site boundary and reference habitat maps
+pyogrio = "*"
+shapely = ">=2.0"
+pystac-client = "*"          # Earth Search STAC (Sentinel-2 L2A, no account)
+healpix-geo = ">=0.4.1"      # HEALPix on the WGS84 ellipsoid, NESTED (sphere only to address the Climate DT grid)
+netcdf4 = "*"
+h5netcdf = "*"
+statsmodels = "*"            # trend confidence intervals
+copernicusmarine = "*"       # Copernicus Marine Service (free account)
+pypdf = "*"
+
 # Pip-only deps go in [pypi-dependencies]. Conda-forge is preferred where available.
-# [pypi-dependencies]
-# pygbif = "*"               # GBIF occurrences
-# polytope-client = "*"      # Destination Earth Climate DT
-# earthkit-data = "*"
+[pypi-dependencies]
+polytope-client = "*"        # Destination Earth Climate DT (DestinE upgraded access)
 
 [feature.docs.dependencies]
 mystmd = "*"
@@ -76,6 +89,25 @@ tests = { features = ["tests"], solve-group = "default" }
 
 [tasks]
 run = "snakemake --cores 1"
+# Sentinel-2 Posidonia extent accuracy test (open data, no account). Work files in work/accuracy/ (gitignored).
+accuracy-inputs = "python pipeline/accuracy/00_fetch_inputs.py work/accuracy"
+accuracy = { cmd = """python pipeline/accuracy/01_composite.py work/accuracy \
+  && python pipeline/accuracy/01_composite.py work/accuracy 2024 S2A_34SDG_20240601_0_L2A,S2A_34SDG_20240621_0_L2A,S2A_34SDG_20240701_0_L2A,S2A_34SDG_20240711_0_L2A,S2A_34SDG_20240721_0_L2A,S2B_34SDG_20240716_0_L2A,S2B_34SDG_20240805_0_L2A,S2B_34SDG_20240815_0_L2A,S2B_34SDG_20240825_0_L2A \
+  && python pipeline/accuracy/02_classify.py work/accuracy \
+  && python pipeline/accuracy/03_stability.py work/accuracy \
+  && python pipeline/accuracy/04_figures.py work/accuracy \
+  && python pipeline/accuracy/05_healpix.py work/accuracy 15 \
+  && python pipeline/accuracy/05_healpix.py work/accuracy 17""", depends-on = ["accuracy-inputs"] }
+# Marine heatwave exposure, observed (Copernicus Marine account in ~/.copernicusmarine). Needs `accuracy` first.
+climate-observed = """python pipeline/climate/01_download_cmems.py work/climate \
+  && python pipeline/climate/02_cells.py work/climate \
+  && python pipeline/climate/03_observed.py work/climate \
+  && python pipeline/climate/04_summarise.py work/climate \
+  && python pipeline/climate/06_rank.py work/climate"""
+# Climate DT projection (DestinE upgraded access, ~/.polytopeapirc). Raw extracts stay in work/climate/data/dt_raw/.
+climate-dt = """for m in IFS-NEMO IFS-FESOM; do for c in 587823 587908 587834 587909 587822 587832; do \
+  python pipeline/climate/11_dt_download.py work/climate $m $c || exit 1; done; done \
+  && python pipeline/climate/05_dt.py work/climate && python pipeline/climate/07_figures.py work/climate"""
 book = "myst build --html"
 lab = "jupyter lab"
 

@@ -1,41 +1,54 @@
-# {{REPO_NAME}}
+# natura2000-laganas-posidonia-evidence
 
-[![CI](https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/actions/workflows/ci.yml/badge.svg)](https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/actions/workflows/ci.yml)
-[![Jupyter Book](https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/actions/workflows/jupyter-book.yml/badge.svg)](https://{{REPO_ORG}}.github.io/{{REPO_NAME}}/)
-[![Docker](https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/actions/workflows/docker.yml/badge.svg)](https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/pkgs/container/{{REPO_NAME}})
+[![CI](https://github.com/annefou/natura2000-laganas-posidonia-evidence/actions/workflows/ci.yml/badge.svg)](https://github.com/annefou/natura2000-laganas-posidonia-evidence/actions/workflows/ci.yml)
+[![Jupyter Book](https://github.com/annefou/natura2000-laganas-posidonia-evidence/actions/workflows/jupyter-book.yml/badge.svg)](https://annefou.github.io/natura2000-laganas-posidonia-evidence/)
+[![Docker](https://github.com/annefou/natura2000-laganas-posidonia-evidence/actions/workflows/docker.yml/badge.svg)](https://github.com/annefou/natura2000-laganas-posidonia-evidence/pkgs/container/natura2000-laganas-posidonia-evidence)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://zenodo.org/badge/DOI/{{ZENODO_DOI}}.svg)]({{ZENODO_DOI}})
 [![FAIR4RS](https://img.shields.io/badge/FAIR4RS-conformant-brightgreen)](docs/fair4rs-checklist.md)
 [![FORRT](https://img.shields.io/badge/FORRT-replication-blue)](https://forrt.org/)
 [![Science Live](https://img.shields.io/badge/Science%20Live-nanopub%20chain-purple)](nanopubs/PUBLISHED.md)
 [![RO-Crate](https://img.shields.io/badge/RO--Crate-1.2-orange)](ro-crate-metadata.json)
-[![Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/{{REPO_ORG}}/{{REPO_NAME}}/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/{{REPO_ORG}}/{{REPO_NAME}})
+[![Software Heritage](https://archive.softwareheritage.org/badge/origin/https://github.com/annefou/natura2000-laganas-posidonia-evidence/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/annefou/natura2000-laganas-posidonia-evidence)
 
-> **{{PAPER_TITLE}}** — replication study.
-> Reference paper: [{{PAPER_DOI}}](https://doi.org/{{PAPER_DOI}})
+> **Towards Global-Scale Seagrass Mapping and Monitoring Using Sentinel-2 on Google Earth Engine: The Case Study of the Aegean and Ionian Seas** — replication study.
+> Reference paper: [10.3390/rs10081227](https://doi.org/10.3390/rs10081227)
 
-This is a self-contained replication of the headline claim of the reference paper. It produces a reproducible computational pipeline, a Zenodo-archived release with a citable DOI, and a FORRT-tagged nanopublication chain on the [Science Live platform](https://platform.sciencelive4all.org).
+**DRAFT, not reviewed.** Part of LifeWatch ERIC's country evidence for Greece. Two analyses for *Posidonia oceanica* meadows (habitat 1120*) in Natura 2000 site GR2210002, Laganas Bay (Zakynthos):
+
+1. **Extent accuracy** (`pipeline/accuracy/`). A Sentinel-2 summer composite, glint correction, depth-invariant indices and a Random Forest, validated by spatial block hold-out (1 km blocks, five folds) against the HCMR habitat map of the site (1999–2002, EMODnet Seabed Habitats GR000019) and checked against the 2015 seagrass survey (Panayotidis et al. 2022, doi:10.17882/87740). Includes a 2024 vs 2025 stability test and aggregation to HEALPix cells.
+2. **Marine heatwave exposure** (`pipeline/climate/`). Copernicus Marine sea-surface temperature and Mediterranean reanalysis at meadow depth, 1982 to date, marine heatwaves after Hobday et al. (2016), exceedance of published Posidonia heat thresholds per meadow cell, and projections from the DestinE Climate Change Adaptation Digital Twin (IFS-NEMO, IFS-FESOM; historical then SSP3-7.0), compared with observations and bias-corrected first.
+
+It measures exposure, not impact: whether meadows are harmed needs field condition data.
+
+**Grid.** Results are published on HEALPix cells with [healpix-geo](https://github.com/GRID4EARTH/healpix-geo), WGS84 ellipsoid, NESTED indexing. The 10 m UTM grid is only a working grid. The spherical HEALPix definition is used for one thing only: to address the Climate DT's own grid, which is defined on the sphere.
 
 ---
 
 ## Quick start
 
 ```bash
-git clone https://github.com/{{REPO_ORG}}/{{REPO_NAME}}.git
-cd {{REPO_NAME}}
+git clone https://github.com/annefou/natura2000-laganas-posidonia-evidence.git
+cd natura2000-laganas-posidonia-evidence
 pixi install
-pixi run snakemake --cores 1
+pixi run accuracy            # open data, no account (~1.5 GB of Sentinel-2 reads)
+pixi run climate-observed    # needs a free Copernicus Marine account (copernicusmarine login)
+pixi run climate-dt          # needs DestinE upgraded access (~/.polytopeapirc)
 ```
+
+Work files go to `work/` (gitignored). Raw Climate DT extracts stay in `work/climate/data/dt_raw/`: the Climate DT terms restrict redistribution, so only derived indicators are reported.
+
+**Inputs and licences.** Natura 2000 boundary (EEA). HCMR habitat map GR000019 (CC BY 4.0). 2015 seagrass survey, SEANOE archive of the EMODnet layer (CC BY 4.0); inside the site it matches the EMODnet WFS layer to within 1 ha of 1,748 ha. EMODnet Bathymetry DTM (CC BY 4.0). Sentinel-2 L2A from Earth Search (Copernicus terms). Copernicus Marine products (Copernicus Marine licence). DestinE Climate DT (DestinE terms).
 
 (Pixi resolves `pixi.toml` against the per-platform `pixi.lock`, installs the env under `.pixi/`, and provides `pixi run` for any task without needing an `activate` step.)
 
 Or with Docker:
 
 ```bash
-docker run --rm ghcr.io/{{REPO_ORG}}/{{REPO_NAME}}:latest
+docker run --rm ghcr.io/annefou/natura2000-laganas-posidonia-evidence:latest
 ```
 
-The Jupyter Book version is at <https://{{REPO_ORG}}.github.io/{{REPO_NAME}}/>.
+The Jupyter Book version is at <https://annefou.github.io/natura2000-laganas-posidonia-evidence/>.
 
 ## Built from a template
 
@@ -117,7 +130,7 @@ For lower-level nanopub work — retraction, superseding, batch publishing — s
 If you use this work, please cite both:
 
 - This software: [`CITATION.cff`](CITATION.cff) → DOI [{{ZENODO_DOI}}]({{ZENODO_DOI}})
-- The original paper: [{{PAPER_DOI}}](https://doi.org/{{PAPER_DOI}})
+- The original paper: [10.3390/rs10081227](https://doi.org/10.3390/rs10081227)
 
 ## Acknowledgements
 
