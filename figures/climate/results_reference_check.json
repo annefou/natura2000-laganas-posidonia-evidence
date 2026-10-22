@@ -1,0 +1,27 @@
+{
+ "reference": "https://raw.githubusercontent.com/ecjoliver/marineHeatWaves/d7292bf08ade0af213fa760b0d7e4adfe5f52894/marineHeatWaves.py",
+ "REP_2_5": {
+  "period": [
+   "1982-01-01",
+   "2025-12-31"
+  ],
+  "threshold_max_abs_diff_degC": 0.002161293645059459,
+  "events_ours": 105,
+  "events_ref": 105,
+  "mhw_days_ours": 2330,
+  "mhw_days_ref": 2330,
+  "daily_agreement": 1.0
+ },
+ "ZT_3_6_12": {
+  "period": [
+   "1987-01-01",
+   "2025-12-31"
+  ],
+  "threshold_max_abs_diff_degC": 0.005081410561839306,
+  "events_ours": 77,
+  "events_ref": 78,
+  "mhw_days_ours": 1858,
+  "mhw_days_ref": 1866,
+  "daily_agreement": 0.99944
+ }
+}

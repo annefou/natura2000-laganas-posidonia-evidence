@@ -97,3 +97,36 @@ def trend(years, y):
     ts = theilslopes(y[ok], years[ok], 0.95)
     return dict(ols=10 * r.params[1], ols_lo=10 * lo, ols_hi=10 * hi, ols_p=float(r.pvalues[1]),
                 sen=10 * ts.slope, sen_lo=10 * ts.low_slope, sen_hi=10 * ts.high_slope, n=int(ok.sum()))
+
+
+# --- Extensions (added 2026-10-22). The functions above are unchanged, so earlier results reproduce exactly. ---
+
+def detrend(t, x):
+    """Remove the linear trend, keeping the record's mean level.  The trend is fitted on deseasonalised anomalies
+    (daily values minus the mean of their day of year over the whole record): fitting raw daily values lets the
+    seasonal cycle leak into the slope, because within each year the season is correlated with time.
+    Marine heatwaves detected on the detrended series separate extremes from long-term warming (the
+    'fixed vs shifting baseline' question, Amaya et al. 2023, Nature 616:29-32)."""
+    t = pd.DatetimeIndex(t)
+    x = np.asarray(x, float)
+    yr = np.asarray(t.year + (t.dayofyear - 1) / 365.25, float)
+    d = doy366(t)
+    ok = np.isfinite(x)
+    clim = pd.Series(x[ok]).groupby(d[ok]).mean().reindex(range(366)).interpolate(limit_direction="both").values
+    slope, _ = np.polyfit(yr[ok], (x - clim[d])[ok], 1)
+    return x - slope * (yr - yr[ok].mean()), slope
+
+
+def categories(x, seas, thr, d, inmhw):
+    """Daily Hobday et al. (2018, Oceanography 31:162-173) category inside events:
+    1 moderate, 2 strong, 3 severe, 4 extreme = floor((T - clim) / (threshold - clim)), clipped to 1..4; 0 outside events."""
+    s, h = seas[d], thr[d]
+    with np.errstate(invalid="ignore", divide="ignore"):
+        c = np.floor((x - s) / (h - s))
+    c = np.clip(np.nan_to_num(c, nan=1), 1, 4).astype(int)
+    return np.where(inmhw, c, 0)
+
+
+def degree_days(x, threshold):
+    """Cumulative heat above an absolute threshold (degC x days), the analogue of degree heating weeks for corals."""
+    return float(np.nansum(np.clip(np.asarray(x, float) - threshold, 0, None)))

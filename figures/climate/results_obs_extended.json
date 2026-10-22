@@ -1,0 +1,151 @@
+{
+ "method": {
+  "baseline": "SST 1983-2012, reanalysis 1987-2016",
+  "detrending": "linear, whole record",
+  "categories": "Hobday et al. 2018",
+  "degree_days_threshold_degC": 28.0
+ },
+ "groups": {
+  "SST (satellite), all meadows": {
+   "cells": 8929,
+   "mean_first_30y": {
+    "mhw_days_fixed": 17.8,
+    "mhw_days_detrended": 20.8,
+    "days_cat1": 16.6,
+    "days_cat2": 1.0,
+    "days_cat3": 0.1,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 0.1
+   },
+   "mean_2016_2025": {
+    "mhw_days_fixed": 136.7,
+    "mhw_days_detrended": 22.0,
+    "days_cat1": 113.9,
+    "days_cat2": 21.0,
+    "days_cat3": 1.7,
+    "days_cat4": 0.1,
+    "degree_days_gt_28": 3.0
+   },
+   "year_2024": {
+    "mhw_days_fixed": 240.3,
+    "mhw_days_detrended": 78.1,
+    "days_cat1": 142.8,
+    "days_cat2": 89.1,
+    "days_cat3": 7.8,
+    "days_cat4": 0.6,
+    "degree_days_gt_28": 28.0
+   },
+   "trend_per_decade": {
+    "mhw_days_fixed": {
+     "ols": 39.42,
+     "ols_lo": 28.7,
+     "ols_hi": 50.14
+    },
+    "mhw_days_detrended": {
+     "ols": -0.65,
+     "ols_lo": -5.91,
+     "ols_hi": 4.61
+    },
+    "degree_days_gt_28": {
+     "ols": 0.89,
+     "ols_lo": -0.41,
+     "ols_hi": 2.19
+    }
+   }
+  },
+  "T at meadow depth (reanalysis), all meadows": {
+   "cells": 8929,
+   "mean_first_30y": {
+    "mhw_days_fixed": 29.2,
+    "mhw_days_detrended": 25.0,
+    "days_cat1": 28.7,
+    "days_cat2": 0.5,
+    "days_cat3": 0.0,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 0.2
+   },
+   "mean_2016_2025": {
+    "mhw_days_fixed": 113.8,
+    "mhw_days_detrended": 15.8,
+    "days_cat1": 102.4,
+    "days_cat2": 10.9,
+    "days_cat3": 0.5,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 1.4
+   },
+   "year_2024": {
+    "mhw_days_fixed": 253.6,
+    "mhw_days_detrended": 74.8,
+    "days_cat1": 192.8,
+    "days_cat2": 56.9,
+    "days_cat3": 3.9,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 13.6
+   },
+   "trend_per_decade": {
+    "mhw_days_fixed": {
+     "ols": 41.51,
+     "ols_lo": 27.74,
+     "ols_hi": 55.29
+    },
+    "mhw_days_detrended": {
+     "ols": -2.23,
+     "ols_lo": -8.99,
+     "ols_hi": 4.53
+    },
+    "degree_days_gt_28": {
+     "ols": 0.51,
+     "ols_lo": -0.27,
+     "ols_hi": 1.29
+    }
+   }
+  },
+  "T at meadow depth (reanalysis), 0-10 m": {
+   "cells": 5110,
+   "mean_first_30y": {
+    "mhw_days_fixed": 30.4,
+    "mhw_days_detrended": 26.4,
+    "days_cat1": 29.7,
+    "days_cat2": 0.6,
+    "days_cat3": 0.0,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 0.4
+   },
+   "mean_2016_2025": {
+    "mhw_days_fixed": 117.2,
+    "mhw_days_detrended": 17.4,
+    "days_cat1": 105.9,
+    "days_cat2": 10.9,
+    "days_cat3": 0.5,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 2.3
+   },
+   "year_2024": {
+    "mhw_days_fixed": 248.2,
+    "mhw_days_detrended": 78.3,
+    "days_cat1": 186.0,
+    "days_cat2": 57.9,
+    "days_cat3": 4.3,
+    "days_cat4": 0.0,
+    "degree_days_gt_28": 22.6
+   },
+   "trend_per_decade": {
+    "mhw_days_fixed": {
+     "ols": 42.09,
+     "ols_lo": 28.78,
+     "ols_hi": 55.41
+    },
+    "mhw_days_detrended": {
+     "ols": -2.35,
+     "ols_lo": -9.77,
+     "ols_hi": 5.07
+    },
+    "degree_days_gt_28": {
+     "ols": 0.85,
+     "ols_lo": -0.44,
+     "ols_hi": 2.14
+    }
+   }
+  }
+ }
+}
