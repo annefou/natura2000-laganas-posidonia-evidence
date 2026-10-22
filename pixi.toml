@@ -63,6 +63,7 @@ h5netcdf = "*"
 statsmodels = "*"            # trend confidence intervals
 copernicusmarine = "*"       # Copernicus Marine Service (free account)
 pypdf = "*"
+openpyxl = ">=3.1.5,<4"
 
 # Pip-only deps go in [pypi-dependencies]. Conda-forge is preferred where available.
 [pypi-dependencies]
@@ -118,6 +119,13 @@ climate-observed = """python pipeline/climate/01_download_cmems.py work/climate 
 climate-dt = """for m in IFS-NEMO IFS-FESOM; do for c in 587823 587908 587834 587909 587822 587832; do \
   python pipeline/climate/11_dt_download.py work/climate $m $c || exit 1; done; done \
   && python pipeline/climate/05_dt.py work/climate && python pipeline/climate/07_figures.py work/climate"""
+# Genetic vulnerability screening of genotyped Greek Posidonia meadows (Litsi-Mizan et al. 2024, CC BY 4.0) x observed
+# heat exposure at sampling depth (Copernicus Marine account in ~/.copernicusmarine). Work files in work/genetics/.
+genetics = """python pipeline/genetics/00_fetch_inputs.py work/genetics \
+  && python pipeline/genetics/01_genetics.py work/genetics \
+  && python pipeline/genetics/02_download_cmems.py work/genetics \
+  && python pipeline/genetics/03_exposure.py work/genetics \
+  && python pipeline/genetics/04_classify.py work/genetics"""
 book = "myst build --html"
 lab = "jupyter lab"
 

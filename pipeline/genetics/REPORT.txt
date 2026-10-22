@@ -1,0 +1,180 @@
+Posidonia oceanica genetic diversity x observed heat exposure, Greek meadows — first prototype
+DRAFT, not reviewed. Prototype for a LifeWatch ERIC service (Greece first, Italy later). Date of run: 2026-10-22.
+Run: pixi run genetics   (Copernicus Marine account in ~/.copernicusmarine). Work files in work/genetics/ (gitignored).
+
+1. WHAT GENETIC DATA EXIST (Step 1, the gate)
+---------------------------------------------
+Checked 2026-10-22 via Crossref, Unpaywall, Europe PMC, publisher ESM, Dryad API, ENA portal, GEO BON API.
+"Verified" = source opened; "partial" = abstract/metadata only (publisher or repository served a bot challenge,
+not bypassed).
+GEO BON EBV portal: 58 datasets, 0 in EBV class "Genetic composition" (classes present: ecosystem structure 16,
+community composition 12, species populations 11, ecosystem functioning 10, ecosystem services 9).
+
+GREECE
+ - "HCMR has genetic data for 18 meadows": CONFIRMED. Source = Litsi-Mizan et al. 2024 Biodivers Conserv 33:257-280,
+   doi:10.1007/s10531-023-02746-0 (Univ. Crete + HCMR: Tsigenopoulos, Tsiaras, Gerakaris, Apostolaki; Kotoulas is not
+   an author). 18 meadows (Ionian 2, N Aegean 4, S Aegean incl. Saronikos/Cyclades/Dodecanese 8, Crete 4), 2014-2021,
+   4-15 m, 442 ramets, 12 SSR (10 used), metrics N, MLG, R, NA, Hs, Ho, FIS, private alleles (Table 1); no Ne, no
+   per-site year. OPEN: CC BY 4.0, raw MLG genotypes (xlsx) + coordinates/depth (docx) as ESM. [verified]
+   The authors state that before them "only three sites in the Greek Seas" had been assessed.
+ - Arnaud-Haond et al. 2012 PLoS ONE 7:e30454, doi:10.1371/journal.pone.0030454, CC BY: 40 meadows, 3 Greek (Saronic
+   Gulf: Agios Nikolaos 6 m, Anavyssos-Sounion two stations), n = 40 each. Open: coordinates, depth, n (Table S1); per-
+   meadow G/R published only for clone-sharing pairs, not the Greek ones. Genotypes probably in Dryad
+   doi:10.5061/dryad.3b8k6 (CC0, 1,541 sampling units, 7-9 SSR) - file not opened (bot challenge). [verified/partial]
+ - Diaz-Almela et al. 2007 Conserv Genet 8:1377, doi:10.1007/s10592-007-9288-0: fish-farm impacted vs control meadows,
+   7 SSR, probably incl. Anavyssos-Sounion. Closed. [partial]
+ - Arnaud-Haond et al. 2007 J Biogeogr 34:963 (not Mol Ecol), doi:10.1111/j.1365-2699.2006.01671.x: 34 meadows Med-wide,
+   SSR; closed; Greek site list not verified. [partial]
+ - Litsi-Mizan et al. 2023 New Phytol 239:2126, doi:10.1111/nph.19084, CC BY: 60 Greek meadows, production by
+   lepidochronology 1997-2018, decline above annual SST 20 C / August 26.5 C. Not genetic, but the best condition
+   companion for these meadows; site table not verified. [partial]
+ - ENA (taxon 55489 = P. oceanica): 150 runs in 17 studies, 0 from Greece (Italy 65, Spain 70; all RNA-seq, reference genome or miRNA, no population genomics). 227 Greek BioSamples
+   from the TREC expedition 2024 (Crete, N Aegean, Attica) are registered with no reads public. No HCMR (incl. Kotoulas
+   group) P. oceanica genomic/transcriptomic dataset found. [verified]
+ITALY (for phase 2)
+ - Jahnke et al. 2019 Heredity 122:233, doi:10.1038/s41437-018-0103-0: 12 stands (6 localities x 5 m / 20-25 m), 8 in
+   Italy (Ischia, Marettimo, Piombino, Meloria), 24 SSR; per-stand N/MLG in ESM; raw genotypes Dryad
+   doi:10.5061/dryad.44s3k14 (CC0, with lat/lon). [verified; Dryad file behind bot challenge]
+ - Nguyen et al. 2023 Mol Ecol 32:4313, doi:10.1111/mec.17032: 6 sites Stagnone di Marsala (Sicily), ddRAD 51k SNPs;
+   VCF + popmap on Dryad doi:10.5061/dryad.1zcrjdfxp (CC0). [verified metadata]
+ - Arnaud-Haond 2012: 3 SE Sicily meadows (Marzamemi, Acqua Azzurra x2). Migliaccio 2005 MEPS 304:55 (Ischia, one
+   meadow, 13 SSR, PDF tables). Serra 2010 Mol Ecol 19:557, Tomasello 2009 Mar Ecol 30:288, Jahnke 2017 Divers Distrib
+   23:1423, Procaccini 2001: closed or not opened, per-meadow values not verified.
+ - Jahnke, Olsen & Procaccini 2015 Mol Ecol 24:2336, doi:10.1111/mec.13174: 56-meadow meta-analysis, per-meadow
+   summary xlsx on Dryad doi:10.5061/dryad.744fb (CC0). Download needs a browser or Dryad API token; Greek/Italian
+   members not verified (draws on Arnaud-Haond 2007/2012, Diaz-Almela 2007, Serra 2010).
+COUNT: open, per-meadow, machine-readable genetic data: Greece 18 meadows (one study, CC BY). Italy 14-15 sampling units
+(Jahnke 2019, Nguyen 2023; CC0 raw genotypes, metrics to compute), different markers. Everything else is PDF-only,
+closed, or on request.
+
+THERMAL TOLERANCE LINKED TO POPULATION/GENOTYPE (none uses Greek plants)
+ - Marin-Guirao et al. 2016 Sci Rep doi:10.1038/srep28615; 2017 Front Plant Sci doi:10.3389/fpls.2017.01142 (Murcia,
+   5 m vs 25 m plants, 32 C x 5 d mesocosm): shallow plants acclimate, deep plants injured; transcriptomic
+   "pre-adaptation" of shallow genotypes. [verified]
+ - Tutar et al. 2017 Mar Environ Res doi:10.1016/j.marenvres.2017.10.011: deep plants respond later, recover less. [partial]
+ - Marin-Guirao et al. 2019 Mol Ecol doi:10.1111/mec.15089: heat-induced flowering in heat-sensitive plants. [partial]
+ - Bennett et al. 2022 New Phytol doi:10.1111/nph.17885 (Catalonia cool, Mallorca central, Cyprus warm; reciprocal
+   transplants 2018-2019; Dryad doi:10.5061/dryad.gb5mkkwq2): cool and warm-edge populations performed as well as each
+   other and better than central ones - thermal performance is population-specific. [verified]
+ - Stipcich et al. 2022 Front Clim doi:10.3389/fclim.2022.844831 (Sardinia cold W vs warm NW; common garden at a power-
+   plant outfall): plant origin modulates heat response. [verified abstract]
+ - Pazzaglia et al. 2022 Mar Pollut Bull doi:10.1016/j.marpolbul.2021.113164 (thermo-priming of seedlings improves
+   tolerance), 2022 Environ Pollut doi:10.1016/j.envpol.2022.119077 (warming x nutrients, origin-dependent);
+   Pazzaglia et al. 2021 Evol Appl doi:10.1111/eva.13212 (review). Ruocco et al. 2019 Front Plant Sci
+   doi:10.3389/fpls.2019.01556 (Procida, 34 C). Savva et al. 2018 (LT50 28.9 C, one W Med population). [verified/partial]
+ - Note: Nguyen et al. 2020 (stress memory) is on P. australis / Zostera muelleri, not P. oceanica.
+ None of these links a neutral-marker diversity value (R, Hs) to heat tolerance; they show depth- and origin-specific
+ responses. The prototype therefore does not convert diversity into tolerance.
+
+
+2. WHAT THE PROTOTYPE USES
+--------------------------
+Genetics: Litsi-Mizan V, Garcia-Escudero CA, Tsigenopoulos CS, Tsiaras K, Gerakaris V, Apostolaki ET (2024) Unravelling the
+genetic pattern of seagrass (Posidonia oceanica) meadows in the Eastern Mediterranean Sea. Biodivers Conserv 33:257-280,
+doi:10.1007/s10531-023-02746-0 (University of Crete / HCMR). CC BY 4.0. 18 meadows (Ionian 2, N Aegean 4, S Aegean 8,
+Crete 4), sampled 2014-2021 by SCUBA at 4-15 m, 15-31 ramets per meadow (442 in total), 12 microsatellites.
+ - ESM1 (xlsx): 334 multilocus genotypes (MLGs) kept after clone removal (GenClone 2.0, psex_FIS < 0.01), 12 loci.
+ - ESM2 (docx) Table S1: coordinates (2 decimals, ~1 km) and one sampling depth per meadow. No per-site sampling year.
+ - Article Table 1: N ramets per meadow, transcribed to pipeline/genetics/litsi_mizan_2024_table1.csv. Checked: MLGs per
+   meadow equal the rows per meadow in ESM1 (all 18), sum N = 442 as in the text.
+Recomputed from ESM1 on the authors' 10 loci (01_genetics.py): R = (G-1)/(N-1), Hs (Nei 1987), Ho, NA, rarefied Ar.
+Agreement with the published Table 1: G exact; R max |diff| 0.05 (rounding); Hs max |diff| 0.03 (r = 0.98);
+Ho max 0.07; NA max 0.4; FIS max 0.47 (r = 0.77). NA/Ho/FIS differences are not resolved (the published values may use
+another locus set or all ramets); FIS is not used. R and Hs, the two metrics used, reproduce.
+Sensitivity metric R_ident: ESM1 keeps some identical 12-locus genotypes as distinct genets (psex not significant).
+Collapsing them lowers R strongly at TRI (0.74 -> 0.30), SOU (1.00 -> 0.57), LIM (0.54 -> 0.35), LES (0.33 -> 0.15),
+AFY (0.45 -> 0.34). Clonal richness in low-diversity meadows depends on that clone-assignment choice.
+
+Exposure (02/03): Copernicus Marine, same products and conventions as pipeline/climate/:
+ - SST L4 REP 0.05 deg (cmems_SST_MED_SST_L4_REP_OBSERVATIONS_010_021), 1982-01-01..2026-09-22, MHW baseline 1983-2012.
+ - Med physics reanalysis 1/24 deg (cmems_mod_med_phy-temp_my_4.2km_P1D-m), thetao at the model level nearest the
+   published sampling depth, 1987-01-01..2026-09-30, MHW baseline 1987-2016.
+ - Hobday et al. 2016 MHW definition (pipeline/climate/mhw.py); days > 28 C (field/synthesis limit used in
+   pipeline/climate) and > 28.9 C (lab LT50, Savva et al. 2018). Means 2016-2025; trends 1982/1987-2025 (Theil-Sen,
+   OLS with Newey-West CI); 2026 partial and excluded.
+ - Grid: nearest product cell; when it is land at that depth, nearest valid sea cell (flagged). SST: 2 of 18 meadows
+   fall back (max 5.4 km). Reanalysis: 10 of 18 (max 10.5 km, LES; LIM 9.0 km, model depth there 7 m).
+ - HEALPix: each meadow carries its healpix-geo cell, WGS84 ellipsoid, NESTED, depth 12 (~1.5 km), matching the
+   coordinate precision. A finer depth would claim precision the coordinates do not have.
+
+3. RESULTS (work/genetics/tables/meadow_vulnerability.csv, figures/fig_genetic_vulnerability_map.png)
+---------------------------------------------------------------------------------------------------
+Exposure at sampling depth (reanalysis), 18 meadows:
+ - MHW days/yr: median 26 in 1987-2015 -> 120 in 2016-2025 (range 87-155). Note: fixed 1987-2016 baseline, so this
+   includes the warming trend, by design (Hobday fixed-baseline convention).
+ - Trend of MHW days 1987-2025: +20 to +39 days/yr per decade (median +29); 95 % CI excludes 0 at all 18.
+   SST: +15 to +33 (median +21), CI excludes 0 at all 18.
+ - 2024 was the record MHW-days year at all 18 meadows, at depth and at the surface (median 277 MHW days at depth).
+   2024 was the record annual maximum at depth at 7 of 18, at the surface at 4 of 18.
+ - Days > 28 C at sampling depth (2016-2025 mean): > 1 day/yr only at AFY (11.8), TRI (9.8), SOU (1.6); zero or < 1
+   elsewhere. At the surface (SST): AFY 14.9, TRI 8.4, PAR 5.5, KEF 4.2. The two shallow (5 m) North Aegean gulf sites (AFY, Toroneos
+   Gulf; TRI, mouth of the Pagasitikos Gulf) are the hot spots.
+Genetics: R 0.33-1.00 (R_ident 0.15-0.95), Hs 0.24-0.46. Lowest diversity: LES, LIM (N Aegean), then NIS, TRI.
+No monotonic relation between genetic diversity and exposure across the 18 (Spearman R vs MHW days -0.07,
+Hs vs MHW days +0.42, n = 18), so the two axes carry different information.
+
+Classification (rules fixed in 04_classify.py before results were seen; relative to these 18 meadows only):
+ E = mean percentile rank of (MHW days/yr 2016-2025 at depth, days > 28 C/yr 2016-2025 at depth);
+ G = mean percentile rank of (R, Hs); high exposure = 6 highest E; low diversity = 6 lowest G.
+ Class 1 high exposure + low diversity: AFY (Afyto), TRI (Trikeri), NIS (Nisyros)
+ Class 2 high exposure only:            PAR, SOU, GOU
+ Class 3 low diversity only:            LES, LIM, SAN
+ Class 4 neither:                       9 meadows (Cyclades except SAN, Crete except GOU, KEF, STR)
+ Robustness: AFY and TRI stay in class 1 under all four alternatives (R_ident; SST exposure; MHW days only; days > 28 C
+ only). NIS stays in only 1 of 4 (it drops out with SST, or either exposure metric alone). SOU enters with R_ident.
+ Read: AFY and TRI are the robust candidates; NIS is marginal.
+This is a co-occurrence screening. It does not show that low diversity makes a meadow more sensitive to heat, nor that
+any meadow is harmed. The link "low genetic/clonal diversity -> lower resilience" is a hypothesis: shown experimentally in another seagrass
+(Zostera marina after the 2003 heatwave: Reusch et al. 2005 PNAS 102:2826, doi:10.1073/pnas.0500008102), not for heat
+in Posidonia. The only Posidonia-wide test (Jahnke et al. 2015, 56 meadows) found weak POSITIVE correlations between
+genetic diversity and human disturbance, which the authors read as local loss of low-diversity meadows and a temporal
+mismatch due to clone longevity: diversity metrics may lag decline by decades.
+
+4. LIMITS
+---------
+ - One study, one marker set: all 18 meadows come from Litsi-Mizan et al. 2024 (10 SSR loci), so the metrics are
+   comparable among them. They are NOT directly comparable with other studies (different loci, sample sizes, clone
+   criteria, Ar rarefaction size); merging Italian or Med-wide data needs common loci re-scoring or a standardised
+   panel (allele-size binning differs between labs).
+ - Neutral microsatellites measure diversity and clonality, not thermal adaptation. One locus (Pooc-PC045G11F) is a
+   Bayescan outlier and excluded; no SNP / genome-wide data for Greek meadows are open.
+ - Sampling years 2014-2021, not given per meadow; genetic composition may have changed (e.g. after 2021-2024 MHWs).
+ - Sampling depth is a single value per meadow; the meadow's depth range and the depth of the deep edge are unknown.
+   The reanalysis is 4.2 km and its coast is coarse: 10 of 18 meadows use a neighbouring sea cell (up to 10.5 km) whose
+   model column is deeper or shallower than the real site; temperature at 5 m in a 4 km cell is not the temperature
+   in a sheltered bay (e.g. LIM model depth 7 m). Satellite SST (skin/foundation) is given alongside for comparison.
+ - Coordinates have 2 decimals (~1 km); HEALPix depth 12 is the finest honest cell.
+ - No condition data (shoot density, mortality, flowering, necrosis) enter: the classification is exposure x diversity,
+   not impact. The ranks are relative; with 18 meadows a different cut (quartiles, absolute thresholds) changes members.
+ - Ne is not estimated (10 SSR loci on 10-27 genets per meadow is too little for LD-Ne).
+
+5. DATA THAT WOULD IMPROVE IT (requests)
+---------------------------------------
+To HCMR (Apostolaki, Tsigenopoulos, Gerakaris; via GA delegates Kotoulas / Chatzinikolaou):
+ 1. Per-meadow sampling date (year, month) and depth range, with the precise coordinates (GPS, > 2 decimals) for the
+    18 meadows of Litsi-Mizan et al. 2024 - fixes the time and place mismatch with the exposure series.
+ 2. The full ramet-level genotype table (442 ramets, with missing data) - to recompute R with explicit clone
+    thresholds (psex, somatic-mutation tolerance) and test the R vs R_ident sensitivity.
+ 3. Condition data at the same meadows (shoot density, cover, necrosis/mortality after 2021-2024 MHWs; the 60-meadow
+    lepidochronology set of Litsi-Mizan et al. 2023) - needed before any statement about impact.
+ 4. Plans/permission for the TREC 2024 Greek samples (Crete, N Aegean, Attica: 227 BioSamples) and any HCMR
+    genome-wide (SNP / ddRAD / WGS) data on Greek P. oceanica - the step from neutral diversity to thermal-adaptive
+    variation.
+ 5. Any in-situ temperature loggers at these meadows (to validate reanalysis at depth, 10/18 use a neighbour cell).
+To SZN (Procaccini, Ruocco, Pazzaglia, Jahnke):
+ 6. Per-meadow genotype tables for Italian meadows with coordinates/depth/date (Jahnke 2015/2017/2019, Serra 2010,
+    Procaccini Ischia series), and a shared allele-binning reference with HCMR (common loci Po5-39, Po15, Po5-49,
+    Po5-10, Po4-3, Po5, Pooc-*) so Greek and Italian meadows can be compared on one scale.
+ 7. Heat-experiment results by source population/genotype (thermo-priming, depth ecotypes) in tabular form, to test
+    whether R/Hs or specific outlier loci predict tolerance - and an offer to include Greek-origin plants.
+ 8. Jahnke et al. 2015 Dryad per-meadow summary (CC0; we can fetch it with a browser) to place Greek meadows Med-wide.
+
+
+6. SOURCES AND LICENCES
+-----------------------
+ - Litsi-Mizan et al. 2024, doi:10.1007/s10531-023-02746-0, article and ESM CC BY 4.0. ESM URLs in 00_fetch_inputs.py.
+ - Copernicus Marine: SST_MED_SST_L4_REP_OBSERVATIONS_010_021 (doi:10.48670/moi-00173); MEDSEA_MULTIYEAR_PHY_006_004
+   (doi:10.25423/CMCC/MEDSEA_MULTIYEAR_PHY_006_004_E3R1). Copernicus Marine Service licence (free, attribution).
+ - Natural Earth 1:10m land (public domain), basemap only.
+ - Hobday AJ et al. 2016 Prog Oceanogr 141:227-238, doi:10.1016/j.pocean.2015.12.014.
+ - Savva I et al. 2018 Ecol Evol 8:12032-12043, doi:10.1002/ece3.4663 (28.9 C LT50).
