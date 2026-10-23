@@ -1,0 +1,13 @@
+variant,class1_meadows
+original p90 fixed,"AFY, NIS, TRI"
+original p90 detrended,"AFY, LIM, NIS, TRI"
+original p95 fixed,"AFY, TRI"
+original p95 detrended,"AFY, NIS, TRI"
+original p99 fixed,"AFY, NIS, TRI"
+original p99 detrended,"AFY, TRI"
+1991-2020 p90 fixed,"AFY, TRI"
+1991-2020 p90 detrended,"AFY, LIM, NIS, TRI"
+1991-2020 p95 fixed,"AFY, NIS, TRI"
+1991-2020 p95 detrended,"AFY, LIM, NIS, TRI"
+1991-2020 p99 fixed,"AFY, NIS, TRI"
+1991-2020 p99 detrended,"AFY, LIM"

@@ -1,0 +1,191 @@
+{
+ "laganas_shallow": [
+  {
+   "variant": "original p90 fixed",
+   "mean_1987_2015": 28.9,
+   "mean_2016_2025": 117.2,
+   "y2024": 248.2,
+   "rank_2024": 1,
+   "trend_per_decade": 42.1,
+   "trend_lo": 28.8,
+   "trend_hi": 55.4
+  },
+  {
+   "variant": "original p90 detrended",
+   "mean_1987_2015": 27.0,
+   "mean_2016_2025": 17.4,
+   "y2024": 78.3,
+   "rank_2024": 4,
+   "trend_per_decade": -2.3,
+   "trend_lo": -9.8,
+   "trend_hi": 5.1
+  },
+  {
+   "variant": "original p95 fixed",
+   "mean_1987_2015": 11.9,
+   "mean_2016_2025": 73.9,
+   "y2024": 173.5,
+   "rank_2024": 1,
+   "trend_per_decade": 26.1,
+   "trend_lo": 14.8,
+   "trend_hi": 37.3
+  },
+  {
+   "variant": "original p95 detrended",
+   "mean_1987_2015": 11.2,
+   "mean_2016_2025": 7.4,
+   "y2024": 51.1,
+   "rank_2024": 2,
+   "trend_per_decade": -1.6,
+   "trend_lo": -5.9,
+   "trend_hi": 2.7
+  },
+  {
+   "variant": "original p99 fixed",
+   "mean_1987_2015": 1.5,
+   "mean_2016_2025": 29.9,
+   "y2024": 119.8,
+   "rank_2024": 1,
+   "trend_per_decade": 10.5,
+   "trend_lo": 0.8,
+   "trend_hi": 20.3
+  },
+  {
+   "variant": "original p99 detrended",
+   "mean_1987_2015": 2.2,
+   "mean_2016_2025": 1.5,
+   "y2024": 10.6,
+   "rank_2024": 3,
+   "trend_per_decade": -0.3,
+   "trend_lo": -1.8,
+   "trend_hi": 1.1
+  },
+  {
+   "variant": "1991-2020 p90 fixed",
+   "mean_1987_2015": 18.9,
+   "mean_2016_2025": 92.0,
+   "y2024": 201.9,
+   "rank_2024": 1,
+   "trend_per_decade": 33.1,
+   "trend_lo": 21.4,
+   "trend_hi": 44.8
+  },
+  {
+   "variant": "1991-2020 p90 detrended",
+   "mean_1987_2015": 29.2,
+   "mean_2016_2025": 17.5,
+   "y2024": 86.4,
+   "rank_2024": 3,
+   "trend_per_decade": -2.5,
+   "trend_lo": -10.3,
+   "trend_hi": 5.2
+  },
+  {
+   "variant": "1991-2020 p95 fixed",
+   "mean_1987_2015": 7.3,
+   "mean_2016_2025": 55.8,
+   "y2024": 146.9,
+   "rank_2024": 1,
+   "trend_per_decade": 19.5,
+   "trend_lo": 9.4,
+   "trend_hi": 29.6
+  },
+  {
+   "variant": "1991-2020 p95 detrended",
+   "mean_1987_2015": 13.1,
+   "mean_2016_2025": 8.1,
+   "y2024": 54.1,
+   "rank_2024": 2,
+   "trend_per_decade": -2.4,
+   "trend_lo": -7.3,
+   "trend_hi": 2.5
+  },
+  {
+   "variant": "1991-2020 p99 fixed",
+   "mean_1987_2015": 1.1,
+   "mean_2016_2025": 22.9,
+   "y2024": 114.8,
+   "rank_2024": 1,
+   "trend_per_decade": 8.3,
+   "trend_lo": -1.5,
+   "trend_hi": 18.1
+  },
+  {
+   "variant": "1991-2020 p99 detrended",
+   "mean_1987_2015": 2.7,
+   "mean_2016_2025": 1.3,
+   "y2024": 10.2,
+   "rank_2024": 3,
+   "trend_per_decade": -0.9,
+   "trend_lo": -2.9,
+   "trend_hi": 1.1
+  }
+ ],
+ "genetics_class1": {
+  "original p90 fixed": [
+   "AFY",
+   "NIS",
+   "TRI"
+  ],
+  "original p90 detrended": [
+   "AFY",
+   "LIM",
+   "NIS",
+   "TRI"
+  ],
+  "original p95 fixed": [
+   "AFY",
+   "TRI"
+  ],
+  "original p95 detrended": [
+   "AFY",
+   "NIS",
+   "TRI"
+  ],
+  "original p99 fixed": [
+   "AFY",
+   "NIS",
+   "TRI"
+  ],
+  "original p99 detrended": [
+   "AFY",
+   "TRI"
+  ],
+  "1991-2020 p90 fixed": [
+   "AFY",
+   "TRI"
+  ],
+  "1991-2020 p90 detrended": [
+   "AFY",
+   "LIM",
+   "NIS",
+   "TRI"
+  ],
+  "1991-2020 p95 fixed": [
+   "AFY",
+   "NIS",
+   "TRI"
+  ],
+  "1991-2020 p95 detrended": [
+   "AFY",
+   "LIM",
+   "NIS",
+   "TRI"
+  ],
+  "1991-2020 p99 fixed": [
+   "AFY",
+   "NIS",
+   "TRI"
+  ],
+  "1991-2020 p99 detrended": [
+   "AFY",
+   "LIM"
+  ]
+ },
+ "genetics_class1_frequency_of_12": {
+  "AFY": 12,
+  "TRI": 11,
+  "NIS": 8,
+  "LIM": 4
+ }
+}

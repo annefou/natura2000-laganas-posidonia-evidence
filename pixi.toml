@@ -121,7 +121,7 @@ climate-dt = """for m in IFS-NEMO IFS-FESOM; do for c in 587823 587908 587834 58
   && python pipeline/climate/05_dt.py work/climate && python pipeline/climate/07_figures.py work/climate"""
 # Detrended marine heatwaves, Hobday 2018 categories, degree-days above 28 degC; then a check of mhw.py against
 # the reference implementation (ecjoliver/marineHeatWaves, pinned commit). Needs `climate-observed` first.
-climate-extended = "python pipeline/climate/08_extended.py work/climate && python pipeline/climate/09_check_reference.py work/climate"
+climate-extended = "python pipeline/climate/08_extended.py work/climate && python pipeline/climate/09_check_reference.py work/climate && python pipeline/climate/10_sensitivity.py work/climate work/genetics"
 # Genetic vulnerability screening of genotyped Greek Posidonia meadows (Litsi-Mizan et al. 2024, CC BY 4.0) x observed
 # heat exposure at sampling depth (Copernicus Marine account in ~/.copernicusmarine). Work files in work/genetics/.
 genetics = """python pipeline/genetics/00_fetch_inputs.py work/genetics \
